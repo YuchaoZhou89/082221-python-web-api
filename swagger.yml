@@ -1,0 +1,179 @@
+swagger: "2.0"
+info:
+  description: Swagger file for Lego Assembly
+  version: "0.0.1"
+  title: Swagger REST API - Lego Assembly
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+
+basePath: "/api"
+
+# Paths supported by the server application
+paths:
+  /parts:
+    get:
+      operationId: "parts.read"
+      tags:
+        - "Parts"
+      summary: "The parts data structure supported by the server application"
+      description: "Read the list of parts"
+      responses:
+        200:
+          description: "Successful read parts list"
+          schema:
+            type: array
+            items:
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                volume:
+                  type: string
+  /constructions:
+    get:
+      operationId: "constructions.read"
+      tags:
+        - "Constructions"
+      summary: "The constructions data structure supported by the server application"
+      description: "Read the list of constructions"
+      responses:
+        200:
+          description: "Successful read constructions list"
+          schema:
+            type: array
+            items:
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                creationDateTime:
+                  type: string
+                  format: date-time
+                parts:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      count:
+                        type: integer
+    
+    post:
+      operationId: "constructions.create"
+      tags:
+        - "Constructions"
+      summary: "Create a construction and add it to the constructions list"
+      description: "Create a construction in the list of constructions"
+      parameters:
+        - name: construction
+          in: body
+          description: Construction to create
+          required: True
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Name of the construction to create
+              parts:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    count:
+                      type: integer
+                description: Parts in the new construction
+      responses:
+        201:
+          description: "Successfully created construction"
+  
+  /constructions/{id}:
+    get:
+      operationId: "constructions.read_one_by_id"
+      tags:
+        - "Constructions"
+      summary: "Query constructions list by ID"
+      description: "Return the construction with a specific ID"
+      parameters:
+        - name: id
+          in: path
+          description: ID of the construction
+          type: string
+          required: True
+      responses:
+        200:
+          description: "Successful fetched construction by ID"
+          schema:
+            type: array
+            items:
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                creationDateTime:
+                  type: string
+                  format: date-time
+                parts:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      count:
+                        type: integer
+    put:
+      operationId: "constructions.update"
+      tags:
+        - "Constructions"
+      summary: "Update a construction"
+      description: "Update a construction in the list of constructions"
+      parameters:
+        - name: id
+          in: path
+          description: ID of the construction
+          type: string
+          required: True
+        - name: construction
+          in: body
+          description: Construction to update
+          required: True
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              parts:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    count:
+                      type: integer
+                description: Parts in the updated construction
+      responses:
+        200:
+          description: "Successfully updated construction"
+    delete:
+      operationId: constructions.delete
+      tags:
+        - Constructions
+      summary: Delete a construction
+      parameters:
+        - name: id
+          in: path
+          type: string
+          required: True
+      responses:
+        200:
+          description: Successfully deleted a construction
