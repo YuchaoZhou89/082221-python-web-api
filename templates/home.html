@@ -3,10 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <title>Application Home Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+    <link rel="stylesheet" href="static/css/home.css">
+    <script
+      src="http://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous">
+    </script>
 </head>
 <body>
-    <h2>
-        Hello World!
-    </h2>
+    <div class="container">
+        <h1 class="banner">Lego Assembly Demo Application</h1>
+        
+        <div class="parts">
+            <table>
+                <caption>Available Parts</caption>
+                <thead>
+                    <tr>
+                        <th class="showWhenInteract"></th>
+                        <th class="showWhenInteract"></th>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Volume</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="constructions">
+            <table>
+                <caption>Constructions <button id="add_construction">+</button></caption>
+                
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Parts</th>
+                        <th>Parts Total</th>
+                        <th>Volume Total</th>
+                        <th>Create Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="editor" hidden="true">
+            <table>
+            <caption id="editor_caption"></caption>
+            <tbody>
+            <tr hidden><td class="construction_id"></td></tr> 
+            <tr><td>
+                <label for="construction_name">Name
+                    <input id="construction_name" type="text" />
+                </label>
+            </td></tr>  
+            <tr><td>
+                <label for="construction_parts">Parts:
+                    <label id="construction_parts">(click plus/minus sign in the Parts table)</label>
+                </label>
+            </td></tr>
+            <tr><td>
+                <label for="construction_total_parts">Total Parts:
+                    <label id="construction_total_parts">0</label>
+                </label>
+                <label for="construction_total_volume">Total Volume:
+                    <label id="construction_total_volume">0</label>
+                </label>
+            </td>
+        </tr>
+            <tr><td>
+                <button id="save"></button>
+                <button id="back">Back</button>
+            </td></tr>
+        </tbody>
+        </table>
+        </div>
+        </div>
+
+
+        <div class="error">
+        </div>
+    </div>
+
+
+
+
+
+<div>
+
+
+
+</div>
 </body>
+<script src="static/js/home.js"></script>
 </html>
