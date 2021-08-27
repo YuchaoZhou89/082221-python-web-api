@@ -3,7 +3,6 @@ from pymongo import MongoClient
 from bson.json_util import dumps
 from bson.objectid import ObjectId
 from bson.errors import InvalidId
-from utils import findValueInJsonArray
 from flask import make_response, abort
 
 client = MongoClient(host="localhost", port=27017)
@@ -64,7 +63,7 @@ def update(id, construction):
     This function updates an existing construction in the constructions structure
     :param id:            id of construction to update
     :param construction:  construction to update
-    :return:              200 on successful update
+    :return:              updated construction structure
     """
     
     if id is not None:
@@ -75,9 +74,8 @@ def update(id, construction):
                 upsert=False
             )
 
-            return make_response(
-                "{name} successfully updated".format(name=construction.get("name")), 200
-            )
+            return read_one_by_id(id), 200
+            
         except InvalidId:
             abort_invalidId(id)
         except:
