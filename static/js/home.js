@@ -109,15 +109,13 @@ ns.view = (function () {
         $parts = $('#construction_parts'),
         $totalParts = $('#construction_total_parts'),
         $totalVolume = $('#construction_total_volume'),
-        $id = $('.construction_id')
-        ;
+        $id = $('.construction_id');
 
     // we store parts in the local storage for fast retrieval and save the round trip
     // we also use a parts ID:Name map to provide optimal data retrieval for constructions
     let partsCache = [],
         partsIdNameMap = {},
         constructionsCache = [];
-
 
     // return the API
     return {
@@ -138,10 +136,6 @@ ns.view = (function () {
             $parts.text('(click plus/minus sign in the Parts table)');
             $totalParts.text('0');
             $totalVolume.text('0');
-        },
-        update_editor: function (fname, lname) {
-            $lname.val(lname);
-            $fname.val(fname).focus();
         },
         build_parts_table: function (parts) {
             let rows = ''
@@ -164,8 +158,8 @@ ns.view = (function () {
                     // e.g. {1: [name, 12]}
                     partsIdNameMap[parts[i].id] = [parts[i].name, parts[i].volume];
                 }
+                
                 $('.parts table > tbody').append(rows);
-
                 partsCache = parts;
             }
         },
